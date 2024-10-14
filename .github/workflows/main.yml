@@ -1,0 +1,23 @@
+name: Testes Automatizados
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout do Código
+        uses: git clone https://github.com/Gota001/qa-e2e-sample-wdio.git
+
+      - name: Instalar Dependências
+        run: npm install
+
+      - name: Executar Testes
+        run: npx wdio

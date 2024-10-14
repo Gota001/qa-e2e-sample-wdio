@@ -1,4 +1,47 @@
-export const config: WebdriverIO.Config = {
+exports.config = {
+    user: process.env.BROWSERSTACK_USERNAME || 'douglashenrique_5DxTFo',
+    key: process.env.BROWSERSTACK_ACCESS_KEY || 'HxCbEr2wXrsauta1qJxh',
+    hostname: 'hub.browserstack.com',
+    services: [
+      [
+        'browserstack',
+        {
+          app: './app/android-wdio-app.apk',
+          browserstackLocal: true
+        },
+      ]
+    ],
+    capabilities: [{
+      'bstack:options': {
+        deviceName: 'Samsung Galaxy S8',
+        platformVersion: '7.0',
+        platformName: 'android',
+      }
+    }, {
+      'bstack:options': {
+        deviceName: 'Motorola Moto G7 Play',
+        platformVersion: '9.0',
+        platformName: 'android',
+      } }, {
+      'bstack:options': {
+        deviceName: 'Google Pixel 3',
+        platformVersion: '9.0',
+        platformName: 'android',
+      }
+    }],
+    commonCapabilities: {
+      'bstack:options': {
+        projectName: "qa-e2e-sample-wdio",
+        buildName: "bstack-demo",
+        testObservability: true,
+        debug: true,
+        networkLogs: true,
+        percy: false,
+        percyCaptureMode: 'auto'
+      }
+    },
+    maxInstances: 3,
+      
     //
     // ====================
     // Runner Configuration
@@ -46,21 +89,20 @@ export const config: WebdriverIO.Config = {
     // and 30 processes will get spawned. The property handles how many capabilities
     // from the same test should run tests.
     //
-    maxInstances: 1,
     //
     // If you have trouble getting all important capabilities together, check out the
     // Sauce Labs platform configurator - a great tool to configure your capabilities:
     // https://saucelabs.com/platform/platform-configurator
     //
-    capabilities: [{
+    //capabilities: [{
         // capabilities for local Appium web tests on an Android Emulator
-        platformName: 'Android',
-        'appium:deviceName': 'Pixel',
-        'appium:platformVersion': '7.1.1',
-        'appium:appPackage': 'com.wdiodemoapp',
-        'appium:appActivity': '.MainActivity',
-        'appium:automationName': 'UiAutomator2'
-    }],
+    //    platformName: 'Android',
+    //    'appium:deviceName': 'Pixel',
+    //    'appium:platformVersion': '7.1.1',
+    //    'appium:appPackage': 'com.wdiodemoapp',
+    //    'appium:appActivity': '.MainActivity',
+    //    'appium:automationName': 'UiAutomator2'
+    //}],
 
     //
     // ===================
@@ -109,7 +151,7 @@ export const config: WebdriverIO.Config = {
     // Services take over a specific job you don't want to take care of. They enhance
     // your test setup with almost no effort. Unlike plugins, they don't add new
     // commands. Instead, they hook themselves up into the test process.
-    services: ['appium'],
+    //services: ['appium'],
 
     // Framework you want to run your specs with.
     // The following are supported: Mocha, Jasmine, and Cucumber
